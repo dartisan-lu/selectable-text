@@ -1,0 +1,84 @@
+# Selectable Text
+
+Flutter/Web is rendering elements in a canvas:
+
+https://docs.flutter.dev/development/tools/web-renderers
+
+and the elements are not represented in the DOM as XML elements. For
+this Flutter Text elements like
+
+[source,dart]
+----
+    return Column(children: const [
+      Text('Bloc 1'),
+      Text('Bloc 2'),
+      Text('Bloc 3'),
+    ]);
+----
+
+and
+
+[source,dart]
+----
+    return const Text.rich(
+      TextSpan(
+        text: 'Part 1',
+        children: [
+          TextSpan(
+            text: ' Part 2',
+          )
+        ],
+      ),
+    );
+----
+
+are not selectable and can not be used for Copy/Paste.
+
+See also: https://github.com/flutter/flutter/issues/64854
+
+One way to make the elements selectable (https://api.flutter.dev/flutter/material/SelectableText-class.html[SelectableText]), is using these standard Flutter elements.
+
+[source,dart]
+----
+    return Column(children: const [
+      SelectableText('Select Bloc 1'),
+      SelectableText('Select Bloc 2'),
+      SelectableText('Select Bloc 3'),
+    ]);
+----
+
+The disadvantage of these elements, is that the element as single is selectable, but
+cannot be selected in combination with the other Selectable Text. Only one element can be selected.
+
+[source,dart]
+----
+    return const SelectableText.rich(
+      TextSpan(
+        text: 'Selectable Part 1',
+        children: [
+          TextSpan(
+            text: ' Selectable Part 2',
+          )
+        ],
+      ),
+    );
+----
+
+With SelectableText.rich all elements inside (Span's) can be selected, but not elements outside the Widget.
+
+*Alternatives:*
+
+The Copy/Paste is a Use Case to consider before starting a Project, what Use Cases need to be covered. Alternative options could also be to generate the Copy values in Clipboard by:
+
+[source,dart]
+----
+    return GestureDetector(
+      child: const Text('Double Click'),
+      onDoubleTap: () => Clipboard.setData(const ClipboardData(text: "Double Click")),
+    );
+----
+
+Another Solution, perhaps could be generating the values for another target like for example:
+https://pub.dev/packages/pdf[PDF]
+
+The solution https://github.com/wilsonowilson/better_selection[better_selection] mentioned is in experimental state, to evaluate in case of implementation of a project.
