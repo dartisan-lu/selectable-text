@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
             Divider(color: Colors.black),
             SelectSpanText(),
             Divider(color: Colors.black),
-            CopyClipboard()
+            CopyClipboard(),
+            Divider(color: Colors.black),
+            GlobalSelector()
           ]),
         ));
   }
@@ -101,6 +103,21 @@ class CopyClipboard extends StatelessWidget {
     return GestureDetector(
       child: const Text('Double Click'),
       onDoubleTap: () => Clipboard.setData(const ClipboardData(text: "Double Click")),
+    );
+  }
+}
+
+class GlobalSelector extends StatelessWidget {
+  const GlobalSelector({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SelectionArea(
+      child: Column(children: const [
+        Text('Select Bloc 1'),
+        Text('Select Bloc 2'),
+        Text('Select Bloc 3'),
+      ])
     );
   }
 }

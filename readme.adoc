@@ -1,11 +1,12 @@
 # Selectable Text
 
+(Changes in Flutter version 3.3, see on the end of the document !!!)
+
 Flutter/Web is rendering elements in a canvas:
 
 https://docs.flutter.dev/development/tools/web-renderers
 
-and the elements are not represented in the DOM as XML elements. For
-this Flutter Text elements like
+and the elements are not represented in the DOM as XML elements. For this Flutter Text elements like
 
 [source,dart]
 ----
@@ -82,3 +83,18 @@ Another Solution, perhaps could be generating the values for another target like
 https://pub.dev/packages/pdf[PDF]
 
 The solution https://github.com/wilsonowilson/better_selection[better_selection] mentioned is in experimental state, to evaluate in case of implementation of a project.
+
+UPDATE !!!
+
+Since Flutter version 3.3 a https://api.flutter.dev/flutter/material/SelectionArea-class.html[Selection Area] is available:
+
+[source,dart]
+----
+    return SelectionArea(
+      child: Column(children: const [
+        Text('Select Bloc 1'),
+        Text('Select Bloc 2'),
+        Text('Select Bloc 3'),
+      ])
+    );
+----
